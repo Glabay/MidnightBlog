@@ -18,10 +18,12 @@ public class SitemapController {
     public String getHomePage() {
         return "index";
     }
+
     @GetMapping("/login")
     public String getLoginPage() {
         return "login";
     }
+
     @GetMapping("/register")
     public String getRegisterPage() {
         return "register";
