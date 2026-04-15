@@ -2,8 +2,6 @@ package dev.midnightcoder.post.model;
 
 import dev.midnightcoder.blog.model.Blog;
 import dev.midnightcoder.comment.model.Comment;
-import dev.midnightcoder.likes.model.Like;
-import dev.midnightcoder.user.model.User;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import lombok.Getter;

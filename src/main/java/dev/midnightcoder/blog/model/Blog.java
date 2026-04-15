@@ -1,6 +1,5 @@
 package dev.midnightcoder.blog.model;
 
-import dev.midnightcoder.comment.model.Comment;
 import dev.midnightcoder.post.model.Post;
 import dev.midnightcoder.user.model.User;
 import jakarta.annotation.PostConstruct;
