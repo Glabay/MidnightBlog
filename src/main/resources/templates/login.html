@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
+<h1>Login</h1>
 
+<p th:if="${param.error}" th:text="'Error: ' + ${param.error}"></p>
+<p th:if="${param.logout}" th:text="'You have been logged out.'"></p>
+<p th:if="${param.registration}" th:text="'You have been registered.'"></p>
+
+<form action="/api/auth/login" method="post">
+    <div>
+        <label for="usernameOrEmail">Username/Email</label>
+        <input type="text" id="usernameOrEmail" name="usernameOrEmail" required>
+    </div>
+
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+
+    <button type="submit">Login</button>
+</form>
+
+<p><a href="/">Back to home</a></p>
 </body>
 </html>

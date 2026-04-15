@@ -1,9 +1,15 @@
 package dev.midnightcoder.comment.repository;
 
+import dev.midnightcoder.comment.model.Comment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.UUID;
+
 /**
  * @author Glabay | Glabay-Studios
  * @project MidnightBlog
  * @social Discord: Glabay
  * @since 2026-04-13
-*/public class CommentRepository {
+ */
+public interface CommentRepository extends JpaRepository<Comment, UUID> {
 }
