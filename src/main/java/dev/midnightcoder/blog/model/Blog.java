@@ -26,7 +26,6 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String title;
-    private String content;
 
     @OneToOne
     private User author;
