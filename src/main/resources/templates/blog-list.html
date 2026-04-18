@@ -4,20 +4,37 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/blog.css}">
 </head>
 <body>
     <!-- Reuse the Header Fragment on EVERY page -->
     <div th:replace="~{fragments/header :: header}"></div>
 
     <!-- TODO: Add Button to create new blog -->
+    <div class="list-container">
+        <h1 class="page-title">Blogs</h1>
+        <p class="page-subtitle">Read thoughts and tutorials from the Midnight Coder community.</p>
 
-    <h1>Blogs</h1>
-    <p th:if="${#lists.isEmpty(blogs)}">No blogs found.</p>
+        <p th:if="${#lists.isEmpty(blogs)}">No blogs found.</p>
 
-    <div th:unless="${#lists.isEmpty(blogs)}">
-        <div th:each="blog : ${blogs}">
-            <h2 th:text="${blog.title}"></h2>
-            <p th:text="${blog.getAuthor().getUsername()}"></p>
+        <div th:unless="${#lists.isEmpty(blogs)}" class="blog-stack">
+            <div th:each="blog : ${blogs}" class="blog-card-large">
+                <div th:text="${blog.getAuthor().getUsername()} + '\'s Blog'" class="card-author"></div>
+                <div class="card-dates">
+                <span th:if="${blog.createdAt != null}"
+                      th:text="'Created: ' + ${#temporals.format(blog.createdAt, 'MMM dd, yyyy')}">Jan 01, 2024</span>
+
+                    <span class="member-count"
+                          th:text="' | ' + ${#lists.size(blog.getPosts())} + ' Posts'"> | 0 Posts</span>
+                </div>
+                <div th:text="${blog.getTitle()}" class="card-title"></div>
+
+                <div class="card-footer">
+                    <div class="card-links">
+                    </div>
+                    <a th:href="@{/blog/{id}(id=${blog.id})}" class="btn btn-primary">View Blog</a>
+                </div>
+            </div>
         </div>
     </div>
 </body>
