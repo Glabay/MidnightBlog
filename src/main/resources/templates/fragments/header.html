@@ -13,11 +13,9 @@
             </ul>
             <div class="auth-buttons">
                 <div th:if="${#authorization.expression('isAuthenticated()')}">
-                    <div>
-                        <form th:action="@{/logout}" method="post">
-                            <button type="submit" class="logout-btn">Logout</button>
-                        </form>
-                    </div>
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
                 </div>
                 <div th:unless="${#authorization.expression('isAuthenticated()')}">
                     <a th:href="@{/login}" class="btn btn-outline">Login</a>
