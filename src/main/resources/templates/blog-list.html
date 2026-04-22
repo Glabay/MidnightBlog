@@ -21,8 +21,8 @@
             <div th:each="blog : ${blogs}" class="blog-card-large">
                 <div th:text="${blog.getAuthor().getUsername()} + '\'s Blog'" class="card-author"></div>
                 <div class="card-dates">
-                <span th:if="${blog.createdAt != null}"
-                      th:text="'Created: ' + ${#temporals.format(blog.createdAt, 'MMM dd, yyyy')}">Jan 01, 2024</span>
+                    <span th:if="${blog.createdAt != null}"
+                          th:text="'Created: ' + ${#temporals.format(blog.createdAt, 'MMM dd, yyyy')}">Jan 01, 2024</span>
 
                     <span class="member-count"
                           th:text="' | ' + ${#lists.size(blog.getPosts())} + ' Posts'"> | 0 Posts</span>
