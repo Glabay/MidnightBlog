@@ -37,9 +37,9 @@ public class BlogApiController {
     }
 
     @GetMapping("/{authorId}/author")
-    public ResponseEntity<List<Blog>> fetchBlogsByAuthor(@PathVariable UUID authorId) {
-        var blogs = blogService.fetchBlogByAuthor(authorId);
-        return ResponseEntity.ok(blogs);
+    public ResponseEntity<Blog> fetchBlogByAuthor(@PathVariable UUID authorId) {
+        var blog = blogService.fetchBlogByAuthor(authorId);
+        return ResponseEntity.ok(blog);
     }
 
     @GetMapping("/{blogId}/blog")

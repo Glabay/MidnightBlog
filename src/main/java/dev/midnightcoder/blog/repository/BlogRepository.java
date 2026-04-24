@@ -17,5 +17,5 @@ import java.util.UUID;
  */
 @Repository
 public interface BlogRepository extends JpaRepository<Blog, UUID> {
-    List<Blog> findAllByAuthor(User author);
+    Optional<Blog> findByAuthor(User author);
 }

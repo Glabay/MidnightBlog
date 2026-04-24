@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -33,9 +34,11 @@ public class BlogService {
         return blogRepository.save(blog);
     }
 
-    public List<Blog> fetchBlogByAuthor(UUID authorId) {
+    public Blog fetchBlogByAuthor(UUID authorId) {
         var author = userService.getUserByUserId(authorId);
-        return blogRepository.findAllByAuthor(author);
+        var blog = blogRepository.findByAuthor(author);
+        return blog.orElse(null);
+
     }
 
     public Blog fetchBlogById(UUID blogId) {

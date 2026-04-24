@@ -10,9 +10,12 @@
     <!-- Reuse the Header Fragment on EVERY page -->
     <div th:replace="~{fragments/header :: header}"></div>
 
-    <!-- TODO: Add Button to create new blog -->
     <div class="list-container">
-        <h1 class="page-title">Blogs</h1>
+        <h1 class="page-title">Blogs
+            <button th:if="${!hasBlog}" class="add-btn" id="add-blog-btn">
+                Create Blog
+            </button>
+        </h1>
         <p class="page-subtitle">Read thoughts and tutorials from the Midnight Coder community.</p>
 
         <p th:if="${#lists.isEmpty(blogs)}">No blogs found.</p>
@@ -36,6 +39,28 @@
                 </div>
             </div>
         </div>
+
+        <!-- Create Blog Modal -->
+        <div th:if="${!hasBlog}" id="blog-modal" class="modal">
+            <input type="hidden" id="user-id" th:value="${userId}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Create Your Blog</h2>
+                </div>
+                <form id="blog-form">
+                    <div class="form-group">
+                        <label for="blog-name">Blog Title</label>
+                        <input type="text" id="blog-name" placeholder="My epic blog" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline close-modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Blog</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
+<script th:src="@{/js/blog.js}"></script>
 </body>
 </html>

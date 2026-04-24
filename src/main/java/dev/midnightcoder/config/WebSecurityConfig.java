@@ -5,7 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
+import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
+
+import static org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter.Directive.COOKIES;
 
 /**
  * @author Glabay | Glabay-Studios
@@ -24,7 +29,6 @@ public class WebSecurityConfig {
                     auth
                         .requestMatchers(
                             "/",
-                            "/login",
                             "/register",
                             "/api/auth/**"
                         ).permitAll()
@@ -38,15 +42,16 @@ public class WebSecurityConfig {
                         ).permitAll()
                         .anyRequest().authenticated()
             )
-            .formLogin(login ->
-                login.loginPage("/login")
-                    .defaultSuccessUrl("/", true)
-                    .permitAll())
-            .logout(logout ->
-                logout
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/")
-                    .permitAll());
+            .formLogin(login -> login
+                .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/", true)
+                .usernameParameter("email")
+                .passwordParameter("password")
+            )
+            .logout((logout) ->
+                logout.addLogoutHandler(new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(COOKIES))))
+            .headers(configurer ->
+                configurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
         return http.build();
     }
 }
